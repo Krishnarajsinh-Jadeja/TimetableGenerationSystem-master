@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .table2{
+    margin-bottom: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table2 {
+
+  border: 25px ridge;
+  border-color: #5a5a5a;
+  box-shadow: 6px 13px 13px 0px black;
+  background-color: #fff;
+  letter-spacing: 1px;
+  font-size: 1.0rem;
+}
+
+.table2 td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+
+}
+
+.table2 th{
+	color: #5a5a5a;
+	font-weight: bolder;
+}
+
+.table2 td {
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+<h1 style="text-align: center; vertical-align: middle;"> Instructor Filtered Timetable</h1>
+ <table class="table2" border="1">
+     {%for row in timetable%}
+     <tr>
+         <td>{{row.section}}</td>
+         <td>{{row.department}}</td>
+         <td>{{row.course }}</td>
+         <td>{{row.venue}}</td>
+         <td>{{row.clstime}}</td>
+     </tr>
+     {%endfor%}
+ </table>
+</body>
+</html>

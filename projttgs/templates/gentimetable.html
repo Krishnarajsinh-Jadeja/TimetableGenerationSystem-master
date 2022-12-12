@@ -1,0 +1,476 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TTGS | Generate Timetable</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <script src="render.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script type="text/javascript" language="JavaScript">
+    window.onload = function () {
+    document.getElementById("download")
+        .addEventListener("click", () => {
+            const invoice = this.document.getElementById("timetable");
+            console.log(invoice);
+            console.log(window);
+            var opt = {
+                margin: 1,
+                filename: 'Timetable.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+}
+    </script>
+    <style>
+
+      *{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+html{
+	scroll-behavior: smooth;
+}
+
+a,a:hover,a:active{
+	text-decoration:none;
+	color: inherit;
+}
+
+h1, h2, h3, h4, h5{
+    text-align: center;
+    font-family: times new roman;
+}
+
+button
+{
+	border-style:none;
+}
+.main
+{
+	max-width: 1200px;
+	height: auto;
+	margin:0 auto;
+}
+
+form {
+	margin-top: 3%;
+	margin-left: 18%;
+	margin-right: 12%;
+}
+
+form fieldset{
+	padding: 50px;
+	border-width: 25px;
+	border-style: ridge;
+	border-color: #257a7a;
+	box-shadow: 6px 13px 13px 0px black;
+	background-color: #fff;
+
+}
+
+.secHead{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 120px;
+	color:#3e4242;
+	font-size: 1.8rem;
+}
+
+.table2{
+    margin-bottom: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table2 {
+
+  border: 25px ridge;
+  border-color: #5a5a5a;
+  box-shadow: 6px 13px 13px 0px black;
+  background-color: #fff;
+  letter-spacing: 1px;
+  font-size: 1.0rem;
+}
+
+.table2 td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+
+}
+
+.table2 th{
+	color: #5a5a5a;
+	font-weight: bolder;
+}
+
+.table2 td {
+  text-align: center;
+}
+
+.table1{
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+}
+
+.table1 td, th{
+    border-top: 1px solid #5a5a5a;
+    padding: 10px;
+  }
+
+
+.table1 th{
+    background-color: #5a5a5a;
+    color: #fff;
+  }
+
+.submit{
+	margin-left: auto;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: auto;
+	line-height: 26px;
+	font-size: 16px;
+	align: center;
+}
+
+.mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:1em;
+}
+.rocker {
+  display: inline-block;
+  position: relative;
+  /*
+  SIZE OF SWITCH
+  ==============
+  All sizes are in em - therefore
+  changing the font-size here
+  will change the size of the switch.
+  See .rocker-small below as example.
+  */
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: #888;
+  width: 7em;
+  height: 4em;
+  overflow: hidden;
+  border-bottom: 0.5em solid #eee;
+}
+
+.rocker-small {
+  font-size: 0.75em; /* Sizes the switch */
+  margin: 1em;
+}
+
+.rocker::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #999;
+  border: 0.5em solid #eee;
+  border-bottom: 0;
+}
+
+.rocker input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-left,
+.switch-right {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5em;
+  width: 3em;
+  transition: 0.2s;
+}
+
+.switch-left {
+  height: 2.4em;
+  width: 2.75em;
+  left: 0.85em;
+  bottom: 0.4em;
+  background-color: #ddd;
+  transform: rotate(15deg) skewX(15deg);
+}
+
+.switch-right {
+  right: 0.5em;
+  bottom: 0;
+  background-color: #bd5757;
+  color: #fff;
+}
+
+.switch-left::before,
+.switch-right::before {
+  content: "";
+  position: absolute;
+  width: 0.4em;
+  height: 2.45em;
+  bottom: -0.45em;
+  background-color: #ccc;
+  transform: skewY(-65deg);
+}
+
+.switch-left::before {
+  left: -0.4em;
+}
+
+.switch-right::before {
+  right: -0.375em;
+  background-color: transparent;
+  transform: skewY(65deg);
+}
+
+input:checked + .switch-left {
+  background-color: #0084d0;
+  color: #fff;
+  bottom: 0px;
+  left: 0.5em;
+  height: 2.5em;
+  width: 3em;
+  transform: rotate(0deg) skewX(0deg);
+}
+
+input:checked + .switch-left::before {
+  background-color: transparent;
+  width: 3.0833em;
+}
+
+input:checked + .switch-left + .switch-right {
+  background-color: #ddd;
+  color: #888;
+  bottom: 0.4em;
+  right: 0.8em;
+  height: 2.4em;
+  width: 2.75em;
+  transform: rotate(-15deg) skewX(-15deg);
+}
+
+input:checked + .switch-left + .switch-right::before {
+  background-color: #ccc;
+}
+
+/* Keyboard Users */
+input:focus + .switch-left {
+  color: #333;
+}
+
+input:checked:focus + .switch-left {
+  color: #fff;
+}
+
+input:focus + .switch-left + .switch-right {
+  color: #fff;
+}
+
+input:checked:focus + .switch-left + .switch-right {
+  color: #333;
+}
+</style>
+
+</head>
+<body>
+<script type="text/javascript">
+
+        function showNotificationOnclick(id){
+            alert("Reminder is set for this class.");
+        }
+
+        function toggle(btn_id){
+<!--            const btn = document.getElementById(btn_id);-->
+<!--            const txt = btn.textContent;-->
+
+<!--            if (txt == "Highlighter (On)"){-->
+<!--                btn.textContent = "Highlighter (Off)";-->
+<!--                btn.value = "off";-->
+<!--            }-->
+<!--            else{-->
+<!--                btn.textContent = "Highlighter (On)";-->
+<!--                btn.value = "on";-->
+<!--            }-->
+
+                const checkbox = document.getElementById(btn_id);
+
+                checkbox.addEventListener('change', (event) => {
+                  if (event.currentTarget.checked) {
+                    checkbox.value = "on";
+                  } else {
+                    checkbox.value = "off";
+                  }
+                })
+        }
+
+        function changeColorOnclick(class_id, btn_id){
+
+            const btn = document.getElementById(class_id);
+            const toggle = document.getElementById(btn_id).value;
+
+            btn.addEventListener('click', function onClick(event) {
+
+            if(toggle == "on"){
+                if (event.detail === 1) {
+                    event.target.style.backgroundColor = 'salmon';
+                    event.target.style.color = 'white';
+                }
+
+                if (event.detail === 2) {
+                     event.target.style.backgroundColor = 'green';
+                     event.target.style.color = 'white';
+                }
+
+                if (event.detail === 3) {
+                    event.target.style.backgroundColor = 'blue';
+                    event.target.style.color = 'white';
+
+                }
+            }
+            else{
+                    event.target.style.backgroundColor = 'white';
+                    event.target.style.color = 'black';
+            }
+
+            });
+        }
+        var checkList = document.getElementById('list1');
+        var items = document.getElementById('items');
+        checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+            if (items.classList.contains('visible')){
+                items.classList.remove('visible');
+                items.style.display = "none";
+            }
+
+            else{
+                items.classList.add('visible');
+                items.style.display = "block";
+            }
+        }
+
+        items.onblur = function(evt) {
+            items.classList.remove('visible');
+        }
+
+
+</script>
+<br><br>
+<div id="timetable">
+    <h1>TTGS | Generated Timetable</h1><br>
+    <table class="table2">
+        <tr text-align="center" vertical-align="middle" >
+            <th colspan="2" style="text-align: center; vertical-align: middle;">Editability Menu Options :-</th>
+        </tr>
+        <tr></tr>
+        <tr text-align="center" vertical-align="middle" >
+            <th colspan="2" style="text-align: center; vertical-align: middle;">1].Click on Class column to set a reminder for the class</th>
+        </tr>
+        <tr></tr>
+        <tr text-align="center" vertical-align="middle" >
+            <th colspan="2" style="text-align: center; vertical-align: middle;">2].Highlighter menu</th>
+        </tr>
+        <tr>
+            <th>Number of Clicks</th>
+            <th>Color of Highlighter</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <th bgcolor="salmon" style="color:white;">Pink</th>
+        </tr>
+        <tr color="white">
+            <th>2</th>
+            <th bgcolor="green" style="color:white;">Green</th>
+        </tr>
+        <tr>
+            <th>3</th>
+            <th bgcolor="blue" style="color:white;">Blue</th>
+        </tr>
+    </table>
+    {% block content %}
+    {% load static %}
+    {% for section in sections %}
+    <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+
+    <div class="mid">
+        <h5>Highlighter Mode</h5>
+      <label class="rocker rocker-small">
+        <input type="checkbox" id = "toggle_button_{{ section.section_id }}" value="on" onchange="toggle('toggle_button_{{ section.section_id }}');" checked>
+        <span class="switch-left">On</span>
+        <span class="switch-right">Off</span>
+      </label>
+    </div>
+
+    <table class="table2">
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <tr>
+            <th>Class #</th>
+            <th>Course</th>
+            <th>Venue(Block- Room)</th>
+            <th>Instructor</th>
+            <th>Class Timing</th>
+        </tr>
+        {% for class in schedule %}
+        {% if class.section == section.section_id %}
+
+        <tr>
+            <th id="section_{{class.section_id}}" onclick="showNotificationOnclick('{{class.section_id}}');">{{class.section_id}}</th>
+            <td id="course_{{class.section_id}}" onclick="changeColorOnclick('course_{{class.section_id}}', 'toggle_button_{{ section.section_id }}');">{{class.course}}</td>
+            <td id="room_{{class.section_id}}" onclick="changeColorOnclick('room_{{class.section_id}}', 'toggle_button_{{ section.section_id }}');">{{class.room}}</td>
+            <td id="instructor_{{class.section_id}}" onclick="changeColorOnclick('instructor_{{class.section_id}}', 'toggle_button_{{ section.section_id }}');">{{class.instructor}}</td>
+            <td id="meeting_time_{{class.section_id}}" onclick="changeColorOnclick('meeting_time_{{class.section_id}}', 'toggle_button_{{ section.section_id }}');">{{class.meeting_time}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {% endfor %}
+    {% endblock %}
+
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+        class="submit" id="download">Download
+</button>
+<button class="submit" id="edit_tt"><a href='http://127.0.0.1:8000/edit_tt'>Edit</a></button>
+</body>
+</html>x
